@@ -1,0 +1,22 @@
+--cpu Cortex-M0+
+".\objects\system_xl32f0xx.o"
+".\objects\startup_xl32f003x6.o"
+".\objects\main.o"
+".\objects\xl32f0xx_it.o"
+".\objects\flash_driver.o"
+".\objects\bsp_driver.o"
+".\objects\ymodem.o"
+".\objects\modbus_crc.o"
+".\objects\xl32f003xx_ll_start_kit.o"
+".\objects\xl32f0xx_ll_exti.o"
+".\objects\xl32f0xx_ll_gpio.o"
+".\objects\xl32f0xx_ll_rcc.o"
+".\objects\xl32f0xx_ll_tim.o"
+".\objects\xl32f0xx_ll_usart.o"
+".\objects\xl32f0xx_ll_utils.o"
+".\objects\app.o"
+".\objects\card_m1.o"
+--library_type=microlib --strict --scatter ".\Objects\Target.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\Target.map" -o .\Objects\Target.axf

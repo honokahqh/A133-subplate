@@ -436,16 +436,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Doc</GroupName>
-          <Files>
-            <File>
-              <FileName>readme.txt</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\readme.txt</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>BSP\XL32F003xx_Start_Kit</GroupName>
           <Files>
             <File>
@@ -502,6 +492,16 @@
               <FileName>card_m1.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\APP\card_m1.c</FilePath>
+            </File>
+            <File>
+              <FileName>log.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\log.c</FilePath>
+            </File>
+            <File>
+              <FileName>log.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\APP\log.h</FilePath>
             </File>
           </Files>
         </Group>

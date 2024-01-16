@@ -1,5 +1,6 @@
 #include "ymodem.h"
 
+static const char *TAG = "ymodem";
 /**
  * ymodem.c
  * @brief 需要实现flash_program_bytes函数，用于将数据写入flash
@@ -108,17 +109,17 @@ int ymodem_packet_analysis(uint8_t *rxbuffer, uint16_t rxlen, uint8_t *txbuffer,
             else
             {
                 i = 0;
-                tick_printf("%s, File name:", __func__);
+                LOG_I(TAG, "%s, File name:", __func__);
                 while (rxbuffer[3 + i] != 0x00 && i < 128)
                 {
                     ymodem_session.filename[i] = rxbuffer[3 + i];
-                    tick_printf("%c", rxbuffer[3 + i]);
+                    LOG_I(TAG, "%c", rxbuffer[3 + i]);
                     i++;
                 }
                 if (i >= 128)
                     return -1;
                 ymodem_session.filename[i] = 0;
-                tick_printf("\r\n");
+                LOG_I(TAG, "\r\n");
 
                 Data_offset = i + 4;
                 i = 0;
@@ -127,7 +128,7 @@ int ymodem_packet_analysis(uint8_t *rxbuffer, uint16_t rxlen, uint8_t *txbuffer,
                     ymodem_session.filesize = (ymodem_session.filesize * 10) + (rxbuffer[Data_offset + i] - 0x30);
                     i++;
                 }
-                tick_printf("FirmSize:%d \r\n", (uint16_t)ymodem_session.filesize);
+                LOG_I(TAG, "FirmSize:%d \r\n", (uint16_t)ymodem_session.filesize);
                 ymodem_session.packet_total = (ymodem_session.filesize + 128 - 1) / 128;
                 if(ymodem_session.packet_total > 64*1024 / 128)//大于64k
                 {

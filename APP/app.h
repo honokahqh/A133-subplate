@@ -5,6 +5,7 @@
 #include "flash_driver.h"
 #include "Modbus_Core.h"
 #include "ymodem.h"
+#include "log.h"
 void System_Run(void);
 
 #endif //

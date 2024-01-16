@@ -2,7 +2,7 @@
 
 /* Private function prototypes -----------------------------------------------*/
 static void SystemClock_Config(void);
-
+static const char *TAG = "main";
 /**
  * main
  * @brief
@@ -15,14 +15,14 @@ int main(void)
 {
     /* 配置系统时钟 */
     SystemClock_Config();
-    IWDG_Config();
+//    IWDG_Config();
     gpio_init();
     uart2_init();
     timer1_init();
     m1_init();
     // ModbusIDMapInit();
     // ModbusRF433MapInit();
-    tick_printf("app run\r\n");
+    LOG_I(TAG, "app run\r\n");
     System_Run();
 }
 
@@ -69,30 +69,6 @@ static void SystemClock_Config(void)
 unsigned int millis(void)
 {
     return sys_ms;
-}
-
-/**
- * tick_printf
- * @brief 打印时间戳或tick值，用于调试程序
- * @author Honokahqh
- * @date 2023-12-16
- */
-void tick_printf(const char *fmt, ...)
-{
-#if DEBUG
-    va_list args;
-    va_start(args, fmt);
-
-    // 获取当前的tick值或时间戳
-    unsigned long tick = millis();
-
-    // 打印时间戳或tick值
-    printf("[%lu] ", tick);
-
-    // 打印剩余的信息
-    vprintf(fmt, args);
-    va_end(args);
-#endif
 }
 
 /**

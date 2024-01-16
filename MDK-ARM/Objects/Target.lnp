@@ -16,6 +16,7 @@
 ".\objects\xl32f0xx_ll_utils.o"
 ".\objects\app.o"
 ".\objects\card_m1.o"
+".\objects\log.o"
 --library_type=microlib --strict --scatter ".\Objects\Target.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

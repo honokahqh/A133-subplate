@@ -15,6 +15,7 @@ static int Task4_rf433_process(struct pt *pt);
 static void ymodem_data_process(void);
 static void ymodem_timeout_process(void);
 
+static const char *TAG = "app";
 void System_Run()
 {
     PT_INIT(&idcard_pt);
@@ -44,7 +45,7 @@ static int Task1_idcard_process(struct pt *pt)
     while (1)
     {
         PT_WAIT_UNTIL(pt, ID_Card_Info.has_card);
-        tick_printf("Id card:%02x %02x %02x %02x %02x\r\n", ID_Card_Info.ID[0], ID_Card_Info.ID[1], ID_Card_Info.ID[2],
+        LOG_I(TAG, "Id card:%02x %02x %02x %02x %02x\r\n", ID_Card_Info.ID[0], ID_Card_Info.ID[1], ID_Card_Info.ID[2],
                     ID_Card_Info.ID[3], ID_Card_Info.ID[4]);
         temp_data[0] = 0x01;
         temp_data[1] = 5;
@@ -57,7 +58,7 @@ static int Task1_idcard_process(struct pt *pt)
         temp_data[7] = crc16 >> 8;
         temp_data[8] = crc16;
         uart_send_data(temp_data, 9);
-        memset((uint8_t *)&ID_Card_Info, 0, sizeof(ID_Card_Info_t));
+		memset((uint8_t *)&ID_Card_Info, 0, sizeof(ID_Card_Info_t));
     }
     PT_END(pt);
 }
@@ -113,7 +114,10 @@ static int Task4_rf433_process(struct pt *pt)
     while (1)
     {
         PT_WAIT_UNTIL(pt, RF433_Info.has_data);
-        tick_printf("RF433 ID:%02x %02x %02x\r\n", RF433_Info.ID[0], RF433_Info.ID[1], RF433_Info.ID[2]);
+        if(RF433_Info.type)
+            LOG_I(TAG, "new bell ID:%02x %02x %02x\r\n", RF433_Info.ID[0], RF433_Info.ID[1], RF433_Info.ID[2]);
+        else
+            LOG_I(TAG, "bell ID:%02x %02x %02x\r\n", RF433_Info.ID[0], RF433_Info.ID[1], RF433_Info.ID[2]);
         temp_data[0] = 0x03;
         temp_data[1] = 3;
         temp_data[2] = RF433_Info.ID[0];
@@ -122,7 +126,7 @@ static int Task4_rf433_process(struct pt *pt)
         crc16 = mb_crc16(temp_data, 5);
         temp_data[5] = crc16 >> 8;
         temp_data[6] = crc16;
-        uart_send_data(temp_data, 7);
+//        uart_send_data(temp_data, 7);
         RF433_Info.has_data = 0;
     }
     PT_END(pt);
@@ -202,7 +206,7 @@ static void Check_M1()
     uint8_t temp_data[9];
     if (M1_Card_Info.has_card)
     {
-        tick_printf("M1 card:%02x %02x %02x %02x %02x\r\n", M1_Card_Info.ID[0], M1_Card_Info.ID[1], M1_Card_Info.ID[2],
+        LOG_I(TAG, "M1 card:%02x %02x %02x %02x %02x\r\n", M1_Card_Info.ID[0], M1_Card_Info.ID[1], M1_Card_Info.ID[2],
                     M1_Card_Info.ID[3], M1_Card_Info.ID[4]);
         temp_data[0] = 0x02;
         temp_data[1] = 5;
@@ -221,7 +225,7 @@ static void Check_M1()
     // static uint8_t new_card_flag;
     // if (M1_Card_Info.has_card)
     // {
-    //     tick_printf("M1 card:%02x %02x %02x %02x %02x\r\n", M1_Card_Info.ID[0], M1_Card_Info.ID[1], M1_Card_Info.ID[2],
+    //     LOG_I(TAG, "M1 card:%02x %02x %02x %02x %02x\r\n", M1_Card_Info.ID[0], M1_Card_Info.ID[1], M1_Card_Info.ID[2],
     //                 M1_Card_Info.ID[3], M1_Card_Info.ID[4]);
     //     if (mbsNode[MBS_ID].HoldReg->_Value[REG_M1].pData != M1_Card_Info.ID[0] || mbsNode[MBS_ID].HoldReg->_Value[REG_M1 + 1].pData != M1_Card_Info.ID[1] || mbsNode[MBS_ID].HoldReg->_Value[REG_M1 + 2].pData != M1_Card_Info.ID[2] || mbsNode[MBS_ID].HoldReg->_Value[REG_M1 + 3].pData != M1_Card_Info.ID[3] || mbsNode[MBS_ID].HoldReg->_Value[REG_M1 + 4].pData != M1_Card_Info.ID[4] || new_card_flag == 0)
     //     {

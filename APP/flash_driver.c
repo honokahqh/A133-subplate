@@ -1,6 +1,7 @@
 // #include <stdint.h>
 #include "flash_driver.h"
 
+static const char *TAG = "flash driver";
 
 uint16_t offset1;
 void flashDataSave(uint8_t type)
@@ -161,7 +162,7 @@ static FlashStatus flash_unlock(void)
 
         if (READ_BIT(FLASH->CR, FLASH_CR_LOCK) != 0x00U)
         {
-            tick_printf("%s, flash unlock failed\r\n", __func__);
+            LOG_I(TAG, "%s, flash unlock failed\r\n", __func__);
             return FLASH_ERROR_UNLOCK;
         }
     }
@@ -174,7 +175,7 @@ static FlashStatus flash_lock(void)
 
     if (READ_BIT(FLASH->CR, FLASH_CR_LOCK) == 0x00u)
     {
-        tick_printf("%s, flash lock failed\r\n", __func__);
+        LOG_I(TAG, "%s, flash lock failed\r\n", __func__);
         return FLASH_ERROR_LOCK;
     }
 

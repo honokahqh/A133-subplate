@@ -56,7 +56,6 @@ extern "C"
 /* Private defines -----------------------------------------------------------*/
 #define Is_APP 0
 #define DEBUG 	1
-void tick_printf(const char *fmt, ...);
 
 void m1_init(void);
 void RFID_Read(void);

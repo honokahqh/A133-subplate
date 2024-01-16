@@ -1,5 +1,7 @@
 #include "main.h"
 
+static const char *TAG = "carc m1";
+
 #define RFCfgReg_Val 0x68
 //********************************************//
 // MF522寄存器定义
@@ -491,7 +493,7 @@ char PcdAnticoll(unsigned char *pSnr, unsigned char anticollision_level)
         }
     }
 
-    // tick_printf("orign : %02x %02x %02x %02x\r\n", *(pSnr),*(pSnr+1),*(pSnr+2),*(pSnr+3));
+    // LOG_I(TAG, "orign : %02x %02x %02x %02x\r\n", *(pSnr),*(pSnr+1),*(pSnr+2),*(pSnr+3));
 
     I_DP1322ES_SetBitMask(CollReg, 0x80);
     return status;
@@ -601,7 +603,6 @@ char PcdSelect3(unsigned char *pSnr, unsigned char *sak)
 
 char PCD_DP1322ES_TypeA_GetUID(void)
 {
-    static unsigned char LastIdM1[5];
     static unsigned char Find_NewM1Card = 0;
     static unsigned char OverCntM1 = 0;
     unsigned char ATQA[2];
@@ -610,13 +611,8 @@ char PCD_DP1322ES_TypeA_GetUID(void)
     unsigned char SAK = 0;
     unsigned char UID_complate1 = 0;
     unsigned char UID_complate2 = 0;
-    // struct timeval tv_now;
-    long tv_check = 0;
-    int i, j, k, x1, x2;
-    int xxx;
+    int k, x1, x2;
     unsigned int rawData = 0;
-    // int timeout = 500000;//500ms
-    int timeout = 200000; // 200ms
 
     if (PcdRequest(PICC_REQIDL, ATQA) != MI_OK) // 寻天线区内未进入休眠状态的卡，返回卡片类型 2字节
     {
@@ -632,11 +628,6 @@ char PCD_DP1322ES_TypeA_GetUID(void)
                 if (++OverCntM1 >= 1) /////////////超时处理，根据实际情况来更改
                 {
                     OverCntM1 = 0;
-                    LastIdM1[0] = 0;
-                    LastIdM1[1] = 0;
-                    LastIdM1[2] = 0;
-                    LastIdM1[3] = 0;
-                    LastIdM1[4] = 0;
                     Find_NewM1Card = 0;
                     SysM1_Val[0] = 0;
                     SysM1_Val[1] = 0;
@@ -650,7 +641,7 @@ char PCD_DP1322ES_TypeA_GetUID(void)
     }
     else
     {
-        tick_printf("Request3:ok  ATQA:%02x %02x\r\n", ATQA[0], ATQA[1]);
+        LOG_I(TAG, "Request3:ok  ATQA:%02x %02x\r\n", ATQA[0], ATQA[1]);
     }
 
     if (errcnt >= 8)
@@ -663,7 +654,7 @@ char PCD_DP1322ES_TypeA_GetUID(void)
     // Anticoll 冲突检测 level1
     if (PcdAnticoll(UID, PICC_ANTICOLL1) != MI_OK)
     {
-        tick_printf("Anticoll1:fail\r\n");
+        LOG_I(TAG, "Anticoll1:fail\r\n");
         errcnt++;
         return 1;
     }
@@ -671,13 +662,13 @@ char PCD_DP1322ES_TypeA_GetUID(void)
     {
         if (PcdSelect1(UID, &SAK) != MI_OK)
         {
-            tick_printf("Select1:fail\r\n");
+            LOG_I(TAG, "Select1:fail\r\n");
             errcnt++;
             return 1;
         }
         else
         {
-            tick_printf("Select1:ok  SAK1:%02x\r\n", SAK);
+            LOG_I(TAG, "Select1:ok  SAK1:%02x\r\n", SAK);
             if (SAK & 0x04)
             {
                 UID_complate1 = 0;
@@ -688,7 +679,7 @@ char PCD_DP1322ES_TypeA_GetUID(void)
                     // Anticoll 冲突检测 level2
                     if (PcdAnticoll(UID + 4, PICC_ANTICOLL2) != MI_OK)
                     {
-                        tick_printf("Anticoll2:fail\r\n");
+                        LOG_I(TAG, "Anticoll2:fail\r\n");
                         errcnt++;
                         return 1;
                     }
@@ -696,13 +687,13 @@ char PCD_DP1322ES_TypeA_GetUID(void)
                     {
                         if (PcdSelect2(UID + 4, &SAK) != MI_OK)
                         {
-                            tick_printf("Select2:fail\r\n");
+                            LOG_I(TAG, "Select2:fail\r\n");
                             errcnt++;
                             return 1;
                         }
                         else
                         {
-                            tick_printf("Select2:ok  SAK2:%02x\r\n", SAK);
+                            LOG_I(TAG, "Select2:ok  SAK2:%02x\r\n", SAK);
                             if (SAK & 0x04)
                             {
                                 UID_complate2 = 0;
@@ -713,7 +704,7 @@ char PCD_DP1322ES_TypeA_GetUID(void)
                                     // Anticoll 冲突检测 level3
                                     if (PcdAnticoll(UID + 8, PICC_ANTICOLL3) != MI_OK)
                                     {
-                                        tick_printf("Anticoll3:fail\r\n");
+                                        LOG_I(TAG, "Anticoll3:fail\r\n");
                                         errcnt++;
                                         return 1;
                                     }
@@ -721,19 +712,19 @@ char PCD_DP1322ES_TypeA_GetUID(void)
                                     {
                                         if (PcdSelect3(UID + 8, &SAK) != MI_OK)
                                         {
-                                            tick_printf("Select3:fail\r\n");
+                                            LOG_I(TAG, "Select3:fail\r\n");
                                             errcnt++;
                                             return 1;
                                         }
                                         else
                                         {
-                                            tick_printf("Select3:ok  SAK3:%02x\r\n", SAK);
+                                            LOG_I(TAG, "Select3:ok  SAK3:%02x\r\n", SAK);
                                             if (SAK & 0x04)
                                             {
                                             }
                                             else
                                             {
-                                                tick_printf("Anticoll3:ok  UID:%02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\r\n",
+                                                LOG_I(TAG, "Anticoll3:ok  UID:%02x %02x %02x %02x %02x %02x %02x %02x %02x %02x\r\n",
                                                             UID[1], UID[2], UID[3], UID[5], UID[6], UID[7], UID[8], UID[9], UID[10], UID[11]);
                                             }
                                         }
@@ -743,7 +734,7 @@ char PCD_DP1322ES_TypeA_GetUID(void)
                             else
                             {
                                 UID_complate2 = 1;
-                                tick_printf("Anticoll2:ok  UID:%02x %02x %02x %02x %02x %02x %02x\r\n",
+                                LOG_I(TAG, "Anticoll2:ok  UID:%02x %02x %02x %02x %02x %02x %02x\r\n",
                                             UID[1], UID[2], UID[3], UID[4], UID[5], UID[6], UID[7]);
                             }
                         }

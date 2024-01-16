@@ -40,4 +40,5 @@
 .\objects\xl32f0xx_it.o: ..\modbus\Modbus_hook.h
 .\objects\xl32f0xx_it.o: ..\ymodem\ymodem.h
 .\objects\xl32f0xx_it.o: ..\APP\app.h
+.\objects\xl32f0xx_it.o: ..\APP\log.h
 .\objects\xl32f0xx_it.o: ..\Inc\xl32f0xx_it.h

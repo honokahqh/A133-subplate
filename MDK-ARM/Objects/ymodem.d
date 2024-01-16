@@ -41,3 +41,4 @@
 .\objects\ymodem.o: ..\modbus\Modbus_Core.h
 .\objects\ymodem.o: ..\modbus\Modbus_hook.h
 .\objects\ymodem.o: ..\ymodem\ymodem.h
+.\objects\ymodem.o: ..\APP\log.h

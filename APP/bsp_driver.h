@@ -74,21 +74,36 @@ typedef struct
 } ID_Card_Info_t;
 extern volatile ID_Card_Info_t ID_Card_Info;
 extern volatile ID_Card_Info_t M1_Card_Info;
+
+// 定义不同呼叫铃的类型
 typedef enum
 {
-	RF433_IDLE = 0,
-	RF433_DATA
-} RF433_State_t;
+	RF433_OLD,
+	RF433_NEW,
+	// 可以在此添加更多的类型
+} BellType;
+
+// 定义呼叫铃参数结构体
+typedef struct
+{
+	uint16_t startMin;
+	uint16_t startMax;
+	uint8_t lowMin;
+	uint8_t lowMax;
+	uint8_t highMin;
+	uint8_t highMax;
+} BellParameters;
 typedef struct
 {
 	uint8_t id[3];
 	uint8_t bit;
-	RF433_State_t state;	// 当前状态
+	uint8_t isBusy;
+	BellType type;
 	uint16_t lowLevelCount; // 低电平持续时间
 	uint8_t syncFlag;		// 同步标志
 	uint8_t receiveOk;		// 接收成功标志
 	uint16_t NeedSample;	// 准备采样
-	uint8_t time[256];
+	uint16_t time[256];
 	uint8_t time_index;
 } RF433_t;
 extern volatile RF433_t RF433;
@@ -98,6 +113,7 @@ typedef struct
 	/* data */
 	uint8_t ID[3];
 	uint8_t has_data;
+	BellType type;
 } RF433_Info_t;
 extern volatile RF433_Info_t RF433_Info;
 

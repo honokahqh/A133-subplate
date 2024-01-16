@@ -41,3 +41,4 @@
 .\objects\bsp_driver.o: ..\modbus\Modbus_hook.h
 .\objects\bsp_driver.o: ..\ymodem\ymodem.h
 .\objects\bsp_driver.o: ..\APP\app.h
+.\objects\bsp_driver.o: ..\APP\log.h

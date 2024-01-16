@@ -41,3 +41,4 @@
 .\objects\flash_driver.o: ..\modbus\Modbus_hook.h
 .\objects\flash_driver.o: ..\ymodem\ymodem.h
 .\objects\flash_driver.o: ..\APP\app.h
+.\objects\flash_driver.o: ..\APP\log.h

@@ -219,15 +219,17 @@ void timer1_init()
     NVIC_SetPriority(TIM3_IRQn, 0);
 }
 #define get_433_io_state() (GPIOA->IDR & CallBell_Data_PIN)
-#define RT1587_SYNCHRONOUS_CODE_MAX 260
-#define RT1587_SYNCHRONOUS_CODE_MIN 140
-#define RT1587_DECODE_LOW_MAX 11
-#define RT1587_DECODE_LOW_MIN 0
-#define RT1587_DECODE_HIGH_MAX 35
-#define RT1587_DECODE_HIGH_MIN 12
 
 volatile RF433_t RF433; // 全局RF433结构体实例
 volatile RF433_Info_t RF433_Info;
+
+// 初始化不同类型的呼叫铃参数
+const BellParameters bellParams[] = {
+    // Start Min Max, Low Min Max, High Min Max
+    {0xCA - 0x10, 0xCA + 0x10, 0x06 - 3, 0x06 + 4, 0x13 - 3, 0x13 + 4},   // 迅铃
+    {0x145 - 0x10, 0x145 + 0x10, 0x0B - 3, 0x0B + 4, 0x20 - 3, 0x20 + 4}, // 索易
+    // 可以在此添加更多的参数
+};
 
 void RT1587_decode(void)
 {
@@ -244,30 +246,36 @@ void RT1587_decode(void)
             else
             {
                 RF433.time[RF433.time_index++] = RF433.lowLevelCount;
-                if ((RT1587_SYNCHRONOUS_CODE_MIN < RF433.lowLevelCount) && (RF433.lowLevelCount < RT1587_SYNCHRONOUS_CODE_MAX))
-                { // 起始帧
-                    memset((uint8_t *)&RF433, 0, sizeof(RF433_t));
-                    RF433.state = RF433_DATA;
+                for (int i = 0; i < sizeof(bellParams) / sizeof(BellParameters); i++)
+                {
+                    if ((bellParams[i].startMin < RF433.lowLevelCount) && (RF433.lowLevelCount < bellParams[i].startMax))
+                    {
+                        memset((uint8_t *)&RF433, 0, sizeof(RF433_t));
+                        RF433.type = (BellType)i; // 设置当前的呼叫铃类型
+                        RF433.isBusy = 1;
+                        return;
+                    }
                 }
-                else if (RF433.state == RF433_DATA && (RT1587_DECODE_LOW_MIN < RF433.lowLevelCount) && (RF433.lowLevelCount < RT1587_DECODE_LOW_MAX))
-                { // 低电平脉宽范围在200us到800us之间
+                if (RF433.isBusy && (bellParams[RF433.type].lowMin) < RF433.lowLevelCount && RF433.lowLevelCount < (bellParams[RF433.type].lowMax))
+                {
                     RF433.id[RF433.bit / 8] |= 1 << (7 - (RF433.bit % 8));
                     RF433.bit++;
                 }
-                else if (RF433.state == RF433_DATA && (RT1587_DECODE_HIGH_MIN < RF433.lowLevelCount) && (RF433.lowLevelCount < RT1587_DECODE_HIGH_MAX))
-                { // 低电平脉宽范围在1.3ms到2ms之间
-                    RF433.id[RF433.bit / 8] |= 0 << (7 - (RF433.bit % 8));
+                else if (RF433.isBusy && (bellParams[RF433.type].highMin) < RF433.lowLevelCount && RF433.lowLevelCount < (bellParams[RF433.type].highMax))
+                {
+                    RF433.id[RF433.bit / 8] &= ~(1 << (7 - (RF433.bit % 8)));
                     RF433.bit++;
                 }
-                else
+                else if (RF433.isBusy)
                 { // 干扰码
                     memset((uint8_t *)&RF433, 0, sizeof(RF433_t));
                     return;
                 }
                 if (RF433.bit == 24)
                 {
-					RF433_Info.has_data = 1;
-					memcpy((uint8_t *)RF433_Info.ID, (uint8_t *)RF433.id, 3);
+                    RF433_Info.has_data = 1;
+                    RF433_Info.type = RF433.type;
+                    memcpy((uint8_t *)RF433_Info.ID, (uint8_t *)RF433.id, 3);
                     memset((uint8_t *)&RF433, 0, sizeof(RF433_t));
                 }
             }
@@ -321,16 +329,16 @@ int checkCardData(uint8_t *data)
             return 0; // 列校验失败
         }
     }
-	
-	// 
-	for (int i = 0; i < 10; i++)
-	{
-		for(int j = 0;j < 4;j++)
-		{
-			if((data[((i * 5) + j + 9) / 8] & (1 << ((i*5 + j + 9) % 8))))
-			ID_Card_Info.ID[(i * 4 + j)/8] |= 1 << ((i * 4 + j)% 8);
-		}
-	}
+
+    //
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            if ((data[((i * 5) + j + 9) / 8] & (1 << ((i * 5 + j + 9) % 8))))
+                ID_Card_Info.ID[(i * 4 + j) / 8] |= 1 << ((i * 4 + j) % 8);
+        }
+    }
     // 所有校验通过
     return 1;
 }
@@ -412,9 +420,9 @@ void id_card_decode()
     if (ID_Card.bit == 64)
     {
         if (checkCardData((uint8_t *)ID_Card.ID)) // !check的时间超过了500us,导致下一次中断进不来
-		{
-			ID_Card_Info.has_card = 1;
-		}
+        {
+            ID_Card_Info.has_card = 1;
+        }
         memset((uint8_t *)&ID_Card, 0, sizeof(ID_Card_t));
     }
     sys_50us_id = 0;
@@ -427,8 +435,6 @@ void EXTI4_15_IRQHandler()
         id_card_decode();
     }
 }
-
-
 
 /**
  * IWDG_Config

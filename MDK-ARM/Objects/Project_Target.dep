@@ -10,8 +10,8 @@ I (..\Drivers\CMSIS\Include\cmsis_armcc.h)(0x630F3A31)
 I (..\Drivers\CMSIS\Include\core_cmFunc.h)(0x630F3A31)
 I (..\Drivers\CMSIS\Device\XL32F0xx\Include\system_xl32f0xx.h)(0x63450965)
 F (..\Drivers\CMSIS\Device\XL32F0xx\Source\arm\startup_xl32f003x6.s)(0x63450964)(--cpu Cortex-M0+ -g --apcs=interwork --pd "__MICROLIB SETA 1"-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 536"--list .\listings\startup_xl32f003x6.lst --xref -o .\objects\startup_xl32f003x6.o --depend .\objects\startup_xl32f003x6.d)
-F (..\Src\main.c)(0x65A34CC7)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-I (..\Inc\main.h)(0x65A0A471)
+F (..\Src\main.c)(0x65A39A58)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (..\Inc\main.h)(0x65A399CD)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\string.h)(0x6025237E)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdarg.h)(0x60252376)
@@ -36,21 +36,22 @@ I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_adc.h)(0x634529DA)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_gpio.h)(0x658F78F8)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_usart.h)(0x63450961)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_iwdg.h)(0x634509D8)
-I (..\APP\bsp_driver.h)(0x65A09570)
+I (..\APP\bsp_driver.h)(0x65A5E60B)
 I (..\Drivers\BSP\XL32F003xx_Start_Kit\xl32f003xx_ll_Start_Kit.h)(0x63450965)
 I (..\ptos\pt.h)(0x6486BB66)
 I (..\ptos\lc.h)(0x6486BB66)
 I (..\ptos\lc-switch.h)(0x6486BB66)
 I (..\ptos\pt-timer.h)(0x6486BB66)
-I (..\APP\app.h)(0x65A3663F)
+I (..\APP\app.h)(0x65A39484)
 I (..\APP\flash_driver.h)(0x65A0A9A2)
 I (..\modbus\Modbus_Core.h)(0x659E4596)
 I (..\modbus\Modbus_CRC.h)(0x6571A4DF)
 I (..\modbus\Modbus_USER.h)(0x65A09883)
 I (..\modbus\Modbus_hook.h)(0x659E3DC2)
 I (..\ymodem\ymodem.h)(0x6571AFAD)
+I (..\APP\log.h)(0x65A5E596)
 F (..\Src\xl32f0xx_it.c)(0x659F3E21)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\xl32f0xx_it.o --omf_browse .\objects\xl32f0xx_it.crf --depend .\objects\xl32f0xx_it.d)
-I (..\Inc\main.h)(0x65A0A471)
+I (..\Inc\main.h)(0x65A399CD)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\string.h)(0x6025237E)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdarg.h)(0x60252376)
@@ -75,23 +76,24 @@ I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_adc.h)(0x634529DA)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_gpio.h)(0x658F78F8)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_usart.h)(0x63450961)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_iwdg.h)(0x634509D8)
-I (..\APP\bsp_driver.h)(0x65A09570)
+I (..\APP\bsp_driver.h)(0x65A5E60B)
 I (..\Drivers\BSP\XL32F003xx_Start_Kit\xl32f003xx_ll_Start_Kit.h)(0x63450965)
 I (..\ptos\pt.h)(0x6486BB66)
 I (..\ptos\lc.h)(0x6486BB66)
 I (..\ptos\lc-switch.h)(0x6486BB66)
 I (..\ptos\pt-timer.h)(0x6486BB66)
-I (..\APP\app.h)(0x65A3663F)
+I (..\APP\app.h)(0x65A39484)
 I (..\APP\flash_driver.h)(0x65A0A9A2)
 I (..\modbus\Modbus_Core.h)(0x659E4596)
 I (..\modbus\Modbus_CRC.h)(0x6571A4DF)
 I (..\modbus\Modbus_USER.h)(0x65A09883)
 I (..\modbus\Modbus_hook.h)(0x659E3DC2)
 I (..\ymodem\ymodem.h)(0x6571AFAD)
+I (..\APP\log.h)(0x65A5E596)
 I (..\Inc\xl32f0xx_it.h)(0x633FD1D4)
-F (..\APP\flash_driver.c)(0x65A33294)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\flash_driver.o --omf_browse .\objects\flash_driver.crf --depend .\objects\flash_driver.d)
+F (..\APP\flash_driver.c)(0x65A39A58)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\flash_driver.o --omf_browse .\objects\flash_driver.crf --depend .\objects\flash_driver.d)
 I (..\APP\flash_driver.h)(0x65A0A9A2)
-I (..\Inc\main.h)(0x65A0A471)
+I (..\Inc\main.h)(0x65A399CD)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\string.h)(0x6025237E)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdarg.h)(0x60252376)
@@ -116,21 +118,22 @@ I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_adc.h)(0x634529DA)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_gpio.h)(0x658F78F8)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_usart.h)(0x63450961)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_iwdg.h)(0x634509D8)
-I (..\APP\bsp_driver.h)(0x65A09570)
+I (..\APP\bsp_driver.h)(0x65A5E60B)
 I (..\Drivers\BSP\XL32F003xx_Start_Kit\xl32f003xx_ll_Start_Kit.h)(0x63450965)
 I (..\ptos\pt.h)(0x6486BB66)
 I (..\ptos\lc.h)(0x6486BB66)
 I (..\ptos\lc-switch.h)(0x6486BB66)
 I (..\ptos\pt-timer.h)(0x6486BB66)
-I (..\APP\app.h)(0x65A3663F)
+I (..\APP\app.h)(0x65A39484)
 I (..\modbus\Modbus_Core.h)(0x659E4596)
 I (..\modbus\Modbus_CRC.h)(0x6571A4DF)
 I (..\modbus\Modbus_USER.h)(0x65A09883)
 I (..\modbus\Modbus_hook.h)(0x659E3DC2)
 I (..\ymodem\ymodem.h)(0x6571AFAD)
-F (..\APP\bsp_driver.c)(0x659E86A6)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\bsp_driver.o --omf_browse .\objects\bsp_driver.crf --depend .\objects\bsp_driver.d)
-I (..\APP\bsp_driver.h)(0x65A09570)
-I (..\Inc\main.h)(0x65A0A471)
+I (..\APP\log.h)(0x65A5E596)
+F (..\APP\bsp_driver.c)(0x65A5EC82)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\bsp_driver.o --omf_browse .\objects\bsp_driver.crf --depend .\objects\bsp_driver.d)
+I (..\APP\bsp_driver.h)(0x65A5E60B)
+I (..\Inc\main.h)(0x65A399CD)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\string.h)(0x6025237E)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdarg.h)(0x60252376)
@@ -160,17 +163,18 @@ I (..\ptos\pt.h)(0x6486BB66)
 I (..\ptos\lc.h)(0x6486BB66)
 I (..\ptos\lc-switch.h)(0x6486BB66)
 I (..\ptos\pt-timer.h)(0x6486BB66)
-I (..\APP\app.h)(0x65A3663F)
+I (..\APP\app.h)(0x65A39484)
 I (..\APP\flash_driver.h)(0x65A0A9A2)
 I (..\modbus\Modbus_Core.h)(0x659E4596)
 I (..\modbus\Modbus_CRC.h)(0x6571A4DF)
 I (..\modbus\Modbus_USER.h)(0x65A09883)
 I (..\modbus\Modbus_hook.h)(0x659E3DC2)
 I (..\ymodem\ymodem.h)(0x6571AFAD)
-F (..\ymodem\ymodem.c)(0x658D2AC3)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\ymodem.o --omf_browse .\objects\ymodem.crf --depend .\objects\ymodem.d)
+I (..\APP\log.h)(0x65A5E596)
+F (..\ymodem\ymodem.c)(0x65A39AAD)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\ymodem.o --omf_browse .\objects\ymodem.crf --depend .\objects\ymodem.d)
 I (..\ymodem\ymodem.h)(0x6571AFAD)
-I (..\APP\app.h)(0x65A3663F)
-I (..\Inc\main.h)(0x65A0A471)
+I (..\APP\app.h)(0x65A39484)
+I (..\Inc\main.h)(0x65A399CD)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\string.h)(0x6025237E)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdarg.h)(0x60252376)
@@ -195,7 +199,7 @@ I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_adc.h)(0x634529DA)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_gpio.h)(0x658F78F8)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_usart.h)(0x63450961)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_iwdg.h)(0x634509D8)
-I (..\APP\bsp_driver.h)(0x65A09570)
+I (..\APP\bsp_driver.h)(0x65A5E60B)
 I (..\Drivers\BSP\XL32F003xx_Start_Kit\xl32f003xx_ll_Start_Kit.h)(0x63450965)
 I (..\ptos\pt.h)(0x6486BB66)
 I (..\ptos\lc.h)(0x6486BB66)
@@ -206,10 +210,10 @@ I (..\modbus\Modbus_Core.h)(0x659E4596)
 I (..\modbus\Modbus_CRC.h)(0x6571A4DF)
 I (..\modbus\Modbus_USER.h)(0x65A09883)
 I (..\modbus\Modbus_hook.h)(0x659E3DC2)
+I (..\APP\log.h)(0x65A5E596)
 F (..\modbus\Modbus_CRC.c)(0x6571A4F1)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\modbus_crc.o --omf_browse .\objects\modbus_crc.crf --depend .\objects\modbus_crc.d)
 I (..\modbus\Modbus_CRC.h)(0x6571A4DF)
 F (..\modbus\Modbus_CRC.h)(0x6571A4DF)()
-F (..\readme.txt)(0x6360C872)()
 F (..\Drivers\BSP\XL32F003xx_Start_Kit\xl32f003xx_ll_Start_Kit.c)(0x63450965)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\xl32f003xx_ll_start_kit.o --omf_browse .\objects\xl32f003xx_ll_start_kit.crf --depend .\objects\xl32f003xx_ll_start_kit.d)
 I (..\Drivers\BSP\XL32F003xx_Start_Kit\xl32f003xx_ll_Start_Kit.h)(0x63450965)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdio.h)(0x60252374)
@@ -297,9 +301,9 @@ I (..\Drivers\CMSIS\Include\core_cmFunc.h)(0x630F3A31)
 I (..\Drivers\CMSIS\Device\XL32F0xx\Include\system_xl32f0xx.h)(0x63450965)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_rcc.h)(0x6572A59E)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_system.h)(0x63450961)
-F (..\APP\app.c)(0x65A3663F)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\app.o --omf_browse .\objects\app.crf --depend .\objects\app.d)
-I (..\APP\app.h)(0x65A3663F)
-I (..\Inc\main.h)(0x65A0A471)
+F (..\APP\app.c)(0x65A5E59C)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\app.o --omf_browse .\objects\app.crf --depend .\objects\app.d)
+I (..\APP\app.h)(0x65A39484)
+I (..\Inc\main.h)(0x65A399CD)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\string.h)(0x6025237E)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdarg.h)(0x60252376)
@@ -324,7 +328,7 @@ I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_adc.h)(0x634529DA)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_gpio.h)(0x658F78F8)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_usart.h)(0x63450961)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_iwdg.h)(0x634509D8)
-I (..\APP\bsp_driver.h)(0x65A09570)
+I (..\APP\bsp_driver.h)(0x65A5E60B)
 I (..\Drivers\BSP\XL32F003xx_Start_Kit\xl32f003xx_ll_Start_Kit.h)(0x63450965)
 I (..\ptos\pt.h)(0x6486BB66)
 I (..\ptos\lc.h)(0x6486BB66)
@@ -336,8 +340,9 @@ I (..\modbus\Modbus_CRC.h)(0x6571A4DF)
 I (..\modbus\Modbus_USER.h)(0x65A09883)
 I (..\modbus\Modbus_hook.h)(0x659E3DC2)
 I (..\ymodem\ymodem.h)(0x6571AFAD)
-F (..\APP\card_m1.c)(0x65A0A1A1)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\card_m1.o --omf_browse .\objects\card_m1.crf --depend .\objects\card_m1.d)
-I (..\Inc\main.h)(0x65A0A471)
+I (..\APP\log.h)(0x65A5E596)
+F (..\APP\card_m1.c)(0x65A5EAC1)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\card_m1.o --omf_browse .\objects\card_m1.crf --depend .\objects\card_m1.d)
+I (..\Inc\main.h)(0x65A399CD)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\string.h)(0x6025237E)
 I (E:\Software\MDK5.27\ARM\ARMCC\include\stdarg.h)(0x60252376)
@@ -362,19 +367,61 @@ I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_adc.h)(0x634529DA)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_gpio.h)(0x658F78F8)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_usart.h)(0x63450961)
 I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_iwdg.h)(0x634509D8)
-I (..\APP\bsp_driver.h)(0x65A09570)
+I (..\APP\bsp_driver.h)(0x65A5E60B)
 I (..\Drivers\BSP\XL32F003xx_Start_Kit\xl32f003xx_ll_Start_Kit.h)(0x63450965)
 I (..\ptos\pt.h)(0x6486BB66)
 I (..\ptos\lc.h)(0x6486BB66)
 I (..\ptos\lc-switch.h)(0x6486BB66)
 I (..\ptos\pt-timer.h)(0x6486BB66)
-I (..\APP\app.h)(0x65A3663F)
+I (..\APP\app.h)(0x65A39484)
 I (..\APP\flash_driver.h)(0x65A0A9A2)
 I (..\modbus\Modbus_Core.h)(0x659E4596)
 I (..\modbus\Modbus_CRC.h)(0x6571A4DF)
 I (..\modbus\Modbus_USER.h)(0x65A09883)
 I (..\modbus\Modbus_hook.h)(0x659E3DC2)
 I (..\ymodem\ymodem.h)(0x6571AFAD)
+I (..\APP\log.h)(0x65A5E596)
+F (..\APP\log.c)(0x65A5EA94)(--c99 -c --cpu Cortex-M0+ -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Inc -I ..\Drivers\CMSIS\Include -I ..\Drivers\XL32F0xx_HAL_Driver -I ..\Drivers\CMSIS\Device\XL32F0xx -I ..\Drivers\BSP\XL32F003xx_Start_Kit -I ..\Drivers\XL32F0xx_HAL_Driver\Inc -I ..\Drivers\XL32F0xx_HAL_Driver\Src -I ..\Drivers\CMSIS\Device\XL32F0xx\Include -I ..\APP -I ..\ptos -I ..\modbus -I ..\ymodem-IE:\Software\Document\MDK\ARMM0\ARM32F0xx_DFP\0.0.6\Device\Include-IE:\Software\MDK5.27\ARM\CMSIS\Include-D__UVISION_VERSION="536" -DXL32F003x6 -DUSE_FULL_LL_DRIVER-o .\objects\log.o --omf_browse .\objects\log.crf --depend .\objects\log.d)
+I (..\APP\log.h)(0x65A5E596)
+I (E:\Software\MDK5.27\ARM\ARMCC\include\stdint.h)(0x6025237E)
+I (E:\Software\MDK5.27\ARM\ARMCC\include\stdarg.h)(0x60252376)
+I (..\Inc\main.h)(0x65A399CD)
+I (E:\Software\MDK5.27\ARM\ARMCC\include\stdio.h)(0x60252374)
+I (E:\Software\MDK5.27\ARM\ARMCC\include\string.h)(0x6025237E)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_rcc.h)(0x6572A59E)
+I (..\Drivers\CMSIS\Device\XL32F0xx\Include\xl32f0xx.h)(0x63450964)
+I (..\Drivers\CMSIS\Device\XL32F0xx\Include\xl32f003x6.h)(0x63450964)
+I (..\Drivers\CMSIS\Include\core_cm0plus.h)(0x630F3A31)
+I (..\Drivers\CMSIS\Include\core_cmInstr.h)(0x630F3A31)
+I (..\Drivers\CMSIS\Include\cmsis_armcc.h)(0x630F3A31)
+I (..\Drivers\CMSIS\Include\core_cmFunc.h)(0x630F3A31)
+I (..\Drivers\CMSIS\Device\XL32F0xx\Include\system_xl32f0xx.h)(0x63450965)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_bus.h)(0x63450963)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_system.h)(0x63450961)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_exti.h)(0x63450962)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_cortex.h)(0x63450962)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_utils.h)(0x63450960)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_pwr.h)(0x63450961)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_dma.h)(0x63450962)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_tim.h)(0x63450A02)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_adc.h)(0x634529DA)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_gpio.h)(0x658F78F8)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_usart.h)(0x63450961)
+I (..\Drivers\XL32F0xx_HAL_Driver\Inc\xl32f0xx_ll_iwdg.h)(0x634509D8)
+I (..\APP\bsp_driver.h)(0x65A5E60B)
+I (..\Drivers\BSP\XL32F003xx_Start_Kit\xl32f003xx_ll_Start_Kit.h)(0x63450965)
+I (..\ptos\pt.h)(0x6486BB66)
+I (..\ptos\lc.h)(0x6486BB66)
+I (..\ptos\lc-switch.h)(0x6486BB66)
+I (..\ptos\pt-timer.h)(0x6486BB66)
+I (..\APP\app.h)(0x65A39484)
+I (..\APP\flash_driver.h)(0x65A0A9A2)
+I (..\modbus\Modbus_Core.h)(0x659E4596)
+I (..\modbus\Modbus_CRC.h)(0x6571A4DF)
+I (..\modbus\Modbus_USER.h)(0x65A09883)
+I (..\modbus\Modbus_hook.h)(0x659E3DC2)
+I (..\ymodem\ymodem.h)(0x6571AFAD)
+F (..\APP\log.h)(0x65A5E596)()
 F (..\ptos\lc.h)(0x6486BB66)()
 F (..\ptos\lc-addrlabels.h)(0x6486BB66)()
 F (..\ptos\lc-switch.h)(0x6486BB66)()

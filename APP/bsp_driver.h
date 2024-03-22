@@ -24,7 +24,7 @@ extern uart_state_t uart_state;
 
 /* 呼叫铃 */
 #define CallBell_Data_PORT GPIOA
-#define CallBell_Data_PIN LL_GPIO_PIN_0
+#define CallBell_Data_PIN LL_GPIO_PIN_12
 #define CallBell_Enable_PORT GPIOB
 #define CallBell_Enable_PIN LL_GPIO_PIN_3
 
@@ -56,8 +56,8 @@ typedef enum
 
 typedef struct
 {
-	uint8_t ID[16]; // 64位数据
-	uint8_t bit;	// 当前bit num
+	uint8_t ID[50]; // 64位数据
+	uint16_t bit;	// 当前bit num
 	uint8_t value;
 	uint8_t count;
 	ID_Card_State_t state;
@@ -69,7 +69,7 @@ extern volatile ID_Card_t ID_Card;
 typedef struct
 {
 	/* data */
-	uint8_t ID[5];
+	uint8_t ID[24];
 	uint8_t has_card;
 } ID_Card_Info_t;
 extern volatile ID_Card_Info_t ID_Card_Info;
@@ -78,8 +78,9 @@ extern volatile ID_Card_Info_t M1_Card_Info;
 // 定义不同呼叫铃的类型
 typedef enum
 {
-	RF433_OLD,
-	RF433_NEW,
+	Bell_Soe,
+	Bell_XunL,
+	Bell_Honokahqh,
 	// 可以在此添加更多的类型
 } BellType;
 
@@ -92,26 +93,26 @@ typedef struct
 	uint8_t lowMax;
 	uint8_t highMin;
 	uint8_t highMax;
+	uint8_t bit_num;
 } BellParameters;
 typedef struct
 {
-	uint8_t id[3];
+	uint8_t id[6];
 	uint8_t bit;
 	uint8_t isBusy;
 	BellType type;
 	uint16_t lowLevelCount; // 低电平持续时间
-	uint8_t syncFlag;		// 同步标志
-	uint8_t receiveOk;		// 接收成功标志
 	uint16_t NeedSample;	// 准备采样
 	uint16_t time[256];
 	uint8_t time_index;
 } RF433_t;
 extern volatile RF433_t RF433;
-
+extern BellParameters bellParams[10];
 typedef struct
 {
 	/* data */
-	uint8_t ID[3];
+	uint8_t ID[8];
+	uint8_t data_len;
 	uint8_t has_data;
 	BellType type;
 } RF433_Info_t;
@@ -127,4 +128,11 @@ void timer1_init(void);
 
 // 看门狗
 void IWDG_Config(void);
+
+// adc
+void ADC_init(void);
+void ADC_start(void);
+
+extern volatile uint16_t uhADCxConvertedData_Voltage_mVolt;
+
 #endif //

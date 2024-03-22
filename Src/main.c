@@ -9,19 +9,19 @@ static const char *TAG = "main";
  * @author Honokahqh
  * @date 2023-12-16
  */
-extern uint8_t wx_ok;
-uint8_t data[128];
+
+uint8_t data[16];
 int main(void)
 {
     /* 配置系统时钟 */
     SystemClock_Config();
-//    IWDG_Config();
+    IWDG_Config();
+    FlashSynCallBellPara();
     gpio_init();
+    ADC_init();
     uart2_init();
     timer1_init();
     m1_init();
-    // ModbusIDMapInit();
-    // ModbusRF433MapInit();
     LOG_I(TAG, "app run\r\n");
     System_Run();
 }

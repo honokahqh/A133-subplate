@@ -16,10 +16,13 @@ static void ymodem_data_process(void);
 static void ymodem_timeout_process(void);
 
 static const char *TAG = "app";
+
+uint32_t timeoutCount;
 void System_Run()
 {
     PT_INIT(&idcard_pt);
     PT_INIT(&uart_pt);
+
     PT_INIT(&pt100ms);
     PT_INIT(&rf433_pt);
     while (1)
@@ -32,42 +35,36 @@ void System_Run()
 }
 
 /**
- * Task1_infrared_process
- * @brief 红外数据处理
+ * Task1_idcard_process
+ * @brief id卡数据处理
  * @author Honokahqh
- * @date 2023-12-16
+ * @date 2024-1-10
  */
 static int Task1_idcard_process(struct pt *pt)
 {
-    uint8_t temp_data[9];
-    uint16_t crc16;
+    static uint32_t sys_ms_last;
     PT_BEGIN(pt);
     while (1)
     {
         PT_WAIT_UNTIL(pt, ID_Card_Info.has_card);
-        LOG_I(TAG, "Id card:%02x %02x %02x %02x %02x\r\n", ID_Card_Info.ID[0], ID_Card_Info.ID[1], ID_Card_Info.ID[2],
-                    ID_Card_Info.ID[3], ID_Card_Info.ID[4]);
-        temp_data[0] = 0x01;
-        temp_data[1] = 5;
-        temp_data[2] = ID_Card_Info.ID[0];
-        temp_data[3] = ID_Card_Info.ID[1];
-        temp_data[4] = ID_Card_Info.ID[2];
-        temp_data[5] = ID_Card_Info.ID[3];
-        temp_data[6] = ID_Card_Info.ID[4];
-        crc16 = mb_crc16(temp_data, 7);
-        temp_data[7] = crc16 >> 8;
-        temp_data[8] = crc16;
-        uart_send_data(temp_data, 9);
-		memset((uint8_t *)&ID_Card_Info, 0, sizeof(ID_Card_Info_t));
+        if (sys_ms > sys_ms_last + 200)
+        {
+            LOG_I(TAG, "Id card:%02x %02x %02x %02x %02x\r\n", ID_Card_Info.ID[0], ID_Card_Info.ID[1], ID_Card_Info.ID[2],
+                  ID_Card_Info.ID[3], ID_Card_Info.ID[4]);
+            CmdSend(Cmd_IDCard, 0x01, &ID_Card_Info.ID[1], 4);
+        }
+        memset(&ID_Card_Info, 0, sizeof(ID_Card_Info_t));
+        sys_ms_last = sys_ms;
+        ID_Card_Info.has_card = 0;
     }
     PT_END(pt);
 }
 
 /**
  * Task2_uart_process
- * @brief 串口数据处理 OTA/MBS
+ * @brief 串口数据处理
  * @author Honokahqh
- * @date 2023-12-16
+ * @date 2024-1-10
  */
 static int Task2_uart_process(struct pt *pt)
 {
@@ -75,6 +72,7 @@ static int Task2_uart_process(struct pt *pt)
     while (1)
     {
         PT_WAIT_UNTIL(pt, uart_state.has_data);
+        CmdProcess(uart_state.rx_buff, uart_state.rx_len);
         ymodem_data_process();
         uart_state.has_data = 0;
         uart_state.rx_len = 0;
@@ -84,49 +82,78 @@ static int Task2_uart_process(struct pt *pt)
 
 /**
  * Task3_100ms_process
- * @brief 100ms周期处理,mbs通讯超时/喂狗/红外通讯超时
+ * @brief 100ms周期处理
  * @author Honokahqh
- * @date 2023-12-16
+ * @date 2024-1-10
  */
-extern volatile uint16_t temperature;
+extern volatile double temperature_average;
 static int Task3_100ms_process(struct pt *pt)
 {
     static uint32_t cnt_100ms = 0;
     PT_BEGIN(pt);
     while (1)
     {
-		if(cnt_100ms++ % 10 == 0 )
+        if (cnt_100ms % 10 == 0)
         {
             ymodem_timeout_process();
             LL_IWDG_ReloadCounter(IWDG);
         }
-        Check_M1();
+        if (cnt_100ms % 10 == 0)
+        {
+            ADC_start();
+        }
+        if (cnt_100ms % 100 == 0)
+        {
+            LOG_I(TAG, "temperature:%.2f\r\n", temperature_average);
+            uint8_t adc_res[2];
+            adc_res[0] = (uint16_t)temperature_average >> 8;
+            adc_res[1] = (uint16_t)temperature_average;
+            CmdSend(Cmd_Temper, 0x01, adc_res, 2);
+        }
+        if (timeoutCount > 6000)
+        {
+            NVIC_SystemReset();
+        }
+        Check_M1(); // 耗时20ms
         cnt_100ms++;
+        timeoutCount++;
         PT_TIMER_DELAY(pt, 100);
     }
     PT_END(pt);
 }
+
+/**
+ * Task4_rf433_process
+ * @brief rf433接收数据处理
+ * @author Honokahqh
+ * @date 2024-1-10
+ */
 static int Task4_rf433_process(struct pt *pt)
 {
-    uint16 crc16;
-    uint8_t temp_data[7];
+    static uint32_t sys_ms_last;
+    static uint8_t RF433_last[8], RF433_len_last;
+    uint8_t i = 0;
     PT_BEGIN(pt);
     while (1)
     {
         PT_WAIT_UNTIL(pt, RF433_Info.has_data);
-        if(RF433_Info.type)
-            LOG_I(TAG, "new bell ID:%02x %02x %02x\r\n", RF433_Info.ID[0], RF433_Info.ID[1], RF433_Info.ID[2]);
-        else
-            LOG_I(TAG, "bell ID:%02x %02x %02x\r\n", RF433_Info.ID[0], RF433_Info.ID[1], RF433_Info.ID[2]);
-        temp_data[0] = 0x03;
-        temp_data[1] = 3;
-        temp_data[2] = RF433_Info.ID[0];
-        temp_data[3] = RF433_Info.ID[1];
-        temp_data[4] = RF433_Info.ID[2];
-        crc16 = mb_crc16(temp_data, 5);
-        temp_data[5] = crc16 >> 8;
-        temp_data[6] = crc16;
-//        uart_send_data(temp_data, 7);
+        LOG_I(TAG, "RF433_Info.type:%d ID:%02x %02x %02x %02x %02x %02x\r\n", RF433_Info.type, RF433_Info.ID[0], RF433_Info.ID[1], RF433_Info.ID[2],
+              RF433_Info.ID[3], RF433_Info.ID[4], RF433_Info.ID[5]);
+        for (i = 0; i < RF433_Info.data_len; i++)
+        {
+            if (RF433_Info.ID[i] != RF433_last[i])
+                break;
+        }
+        if (i != RF433_Info.data_len || RF433_Info.data_len != RF433_len_last || sys_ms > sys_ms_last + 200)
+        {
+            if(RF433_Info.data_len == 6)
+                CmdSend(Cmd_RF433, 0x02, RF433_Info.ID, RF433_Info.data_len);
+            else
+                CmdSend(Cmd_RF433, 0x01, RF433_Info.ID, RF433_Info.data_len);
+        }
+        memcpy(RF433_last, (uint8_t *)RF433_Info.ID, 6);
+        RF433_len_last = RF433_Info.data_len;
+        sys_ms_last = sys_ms;
         RF433_Info.has_data = 0;
     }
     PT_END(pt);
@@ -159,10 +186,10 @@ void ymodem_data_process()
         LL_mDelay(5);
         if (len > 0)
             uart_send_data(data, len);
-        // if (res == 2) // 更新完成
-        // {
-        //     boot_to_app(APP_ADDR);
-        // }
+        //        if (res == 2) // 更新完成
+        //        {
+        //            boot_to_app(APP_ADDR);
+        //        }
     }
 #endif
 }
@@ -198,49 +225,29 @@ static void ymodem_timeout_process()
 #endif
 }
 
+/**
+ * Check_M1
+ * @brief 读M1卡 卡号
+ * @author Honokahqh
+ * @date 2024-1-10
+ */
 static void Check_M1()
 {
+    static uint8_t res_last, res = 0;
+    uint8_t temp_data[11];
     // 周期spi读卡
-    PCD_DP1322ES_TypeA_GetUID();
-
-    uint8_t temp_data[9];
-    if (M1_Card_Info.has_card)
+    res = PCD_DP1322ES_TypeA_GetUID();
+    if (res == 0xAA)
     {
-        LOG_I(TAG, "M1 card:%02x %02x %02x %02x %02x\r\n", M1_Card_Info.ID[0], M1_Card_Info.ID[1], M1_Card_Info.ID[2],
-                    M1_Card_Info.ID[3], M1_Card_Info.ID[4]);
-        temp_data[0] = 0x02;
-        temp_data[1] = 5;
-        temp_data[2] = M1_Card_Info.ID[0];
-        temp_data[3] = M1_Card_Info.ID[1];
-        temp_data[4] = M1_Card_Info.ID[2];
-        temp_data[5] = M1_Card_Info.ID[3];
-        temp_data[6] = M1_Card_Info.ID[4];
-        uint16_t crc16 = mb_crc16(temp_data, 7);
-        temp_data[7] = crc16 >> 8;
-        temp_data[8] = crc16;
-        uart_send_data(temp_data, 9);
-        M1_Card_Info.has_card = 0;
+        LOG_I(TAG, "new card:%02x %02x %02x %02x %02x\r\n", M1_Card_Info.ID[0], M1_Card_Info.ID[1], M1_Card_Info.ID[2],
+              M1_Card_Info.ID[3], M1_Card_Info.ID[4]);
     }
-
-    // static uint8_t new_card_flag;
-    // if (M1_Card_Info.has_card)
-    // {
-    //     LOG_I(TAG, "M1 card:%02x %02x %02x %02x %02x\r\n", M1_Card_Info.ID[0], M1_Card_Info.ID[1], M1_Card_Info.ID[2],
-    //                 M1_Card_Info.ID[3], M1_Card_Info.ID[4]);
-    //     if (mbsNode[MBS_ID].HoldReg->_Value[REG_M1].pData != M1_Card_Info.ID[0] || mbsNode[MBS_ID].HoldReg->_Value[REG_M1 + 1].pData != M1_Card_Info.ID[1] || mbsNode[MBS_ID].HoldReg->_Value[REG_M1 + 2].pData != M1_Card_Info.ID[2] || mbsNode[MBS_ID].HoldReg->_Value[REG_M1 + 3].pData != M1_Card_Info.ID[3] || mbsNode[MBS_ID].HoldReg->_Value[REG_M1 + 4].pData != M1_Card_Info.ID[4] || new_card_flag == 0)
-    //     {
-    //         mbsNode[MBS_ID].HoldReg->_Value[REG_M1].pData = M1_Card_Info.ID[0];
-    //         mbsNode[MBS_ID].HoldReg->_Value[REG_M1 + 1].pData = M1_Card_Info.ID[1];
-    //         mbsNode[MBS_ID].HoldReg->_Value[REG_M1 + 2].pData = M1_Card_Info.ID[2];
-    //         mbsNode[MBS_ID].HoldReg->_Value[REG_M1 + 3].pData = M1_Card_Info.ID[3];
-    //         mbsNode[MBS_ID].HoldReg->_Value[REG_M1 + 4].pData = M1_Card_Info.ID[4];
-    //         mbsNode[MBS_ID].coil->_Value[COIL_M1].pData = 1;
-    //         new_card_flag = 1;
-    //     }
-    //     memset((uint8_t *)&M1_Card_Info, 0, sizeof(ID_Card_Info_t));
-    // }
-    // else
-    // {
-    //     new_card_flag = 0;
-    // }
+    if (res != res_last)
+    {
+        res_last = res;
+        if (res == 0xAA)
+        {
+            CmdSend(Cmd_M1Card, 0x01, M1_Card_Info.ID, 5);
+        }
+    }
 }

@@ -42,3 +42,4 @@
 .\objects\bsp_driver.o: ..\ymodem\ymodem.h
 .\objects\bsp_driver.o: ..\APP\app.h
 .\objects\bsp_driver.o: ..\APP\log.h
+.\objects\bsp_driver.o: ..\APP\cmd_process.h

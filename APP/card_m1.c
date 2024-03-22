@@ -765,6 +765,7 @@ char PCD_DP1322ES_TypeA_GetUID(void)
                 OverCntM1 = 0;
                 memcpy((uint8_t *)M1_Card_Info.ID, SysM1_Val, 5);
                 M1_Card_Info.has_card = 1;
+                return 0xAA;
             }
         }
     }

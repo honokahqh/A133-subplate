@@ -1,5 +1,5 @@
 .\objects\flash_driver.o: ..\APP\flash_driver.c
-.\objects\flash_driver.o: ..\APP\flash_driver.h
+.\objects\flash_driver.o: ..\APP\app.h
 .\objects\flash_driver.o: ..\Inc\main.h
 .\objects\flash_driver.o: E:\Software\MDK5.27\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\flash_driver.o: E:\Software\MDK5.27\ARM\ARMCC\Bin\..\include\string.h
@@ -40,5 +40,5 @@
 .\objects\flash_driver.o: ..\modbus\Modbus_Core.h
 .\objects\flash_driver.o: ..\modbus\Modbus_hook.h
 .\objects\flash_driver.o: ..\ymodem\ymodem.h
-.\objects\flash_driver.o: ..\APP\app.h
 .\objects\flash_driver.o: ..\APP\log.h
+.\objects\flash_driver.o: ..\APP\cmd_process.h

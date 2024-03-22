@@ -7,6 +7,7 @@
 ".\objects\bsp_driver.o"
 ".\objects\ymodem.o"
 ".\objects\modbus_crc.o"
+".\objects\cmd_process.o"
 ".\objects\xl32f003xx_ll_start_kit.o"
 ".\objects\xl32f0xx_ll_exti.o"
 ".\objects\xl32f0xx_ll_gpio.o"
@@ -16,7 +17,6 @@
 ".\objects\xl32f0xx_ll_utils.o"
 ".\objects\app.o"
 ".\objects\card_m1.o"
-".\objects\log.o"
 --library_type=microlib --strict --scatter ".\Objects\Target.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

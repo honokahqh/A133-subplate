@@ -41,3 +41,4 @@
 .\objects\main.o: ..\ymodem\ymodem.h
 .\objects\main.o: ..\APP\app.h
 .\objects\main.o: ..\APP\log.h
+.\objects\main.o: ..\APP\cmd_process.h

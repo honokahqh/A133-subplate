@@ -19,7 +19,7 @@
 #define MBS_RF433Version 100
 #define MBS_RF433 1
 
-#define Dev_Version 100
+#define Dev_Version 101
 
 /***************************************************************/
 #define MBS_FUNCTION_01_ENABLE (1)

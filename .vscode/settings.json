@@ -13,7 +13,8 @@
         "xl32f0xx_ll_iwdg.h": "c",
         "flash_driver.h": "c",
         "app.h": "c",
-        "crtdefs.h": "c"
+        "crtdefs.h": "c",
+        "cmd_process.h": "c"
     },
     "files.autoGuessEncoding": true,
     // "C_Cpp.errorSquiggles": "disabled"

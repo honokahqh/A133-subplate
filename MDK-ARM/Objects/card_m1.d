@@ -41,3 +41,4 @@
 .\objects\card_m1.o: ..\ymodem\ymodem.h
 .\objects\card_m1.o: ..\APP\app.h
 .\objects\card_m1.o: ..\APP\log.h
+.\objects\card_m1.o: ..\APP\cmd_process.h

@@ -276,7 +276,7 @@
               <OCR_RVCT4>
                 <Type>1</Type>
                 <StartAddress>0x8000000</StartAddress>
-                <Size>0x8000</Size>
+                <Size>0x10000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
                 <Type>1</Type>
@@ -322,7 +322,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>1</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -433,6 +433,11 @@
               <FileType>5</FileType>
               <FilePath>..\modbus\Modbus_CRC.h</FilePath>
             </File>
+            <File>
+              <FileName>cmd_process.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\APP\cmd_process.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -492,11 +497,6 @@
               <FileName>card_m1.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\APP\card_m1.c</FilePath>
-            </File>
-            <File>
-              <FileName>log.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\log.c</FilePath>
             </File>
             <File>
               <FileName>log.h</FileName>
